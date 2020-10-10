@@ -8,6 +8,8 @@ import 'package:student/status.dart';
 import 'package:http/http.dart' as http;
 
 class DashBoard extends StatefulWidget {
+  String uid;
+  DashBoard({Key key, @required this.uid}) : super(key: key);
   @override
   _DashBoardState createState() => _DashBoardState();
 }
@@ -16,7 +18,7 @@ class _DashBoardState extends State<DashBoard> {
   TextEditingController _classcontroller = TextEditingController();
   TextEditingController _studycontroller = TextEditingController();
   TextEditingController _sleepcontroller = TextEditingController();
-  TextEditingController _idcontroller = TextEditingController();
+
   double activity;
   var coll;
   // final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -52,6 +54,7 @@ class _DashBoardState extends State<DashBoard> {
       "sleephours": _sleepcontroller.text,
       "studyhours": _studycontroller.text,
       "activity": json.encode(activity),
+      "srn": widget.uid,
     };
     String body = json.encode(data);
     http.Response response = await http.post(
@@ -65,7 +68,7 @@ class _DashBoardState extends State<DashBoard> {
   @override
   Widget build(BuildContext context) {
     print(activity);
-    final srn = ModalRoute.of(context).settings.arguments;
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Student'),
@@ -101,13 +104,13 @@ class _DashBoardState extends State<DashBoard> {
                   print(activity);
                 }),
             FlatButton.icon(
-                onPressed: () => onsave(srn),
+                onPressed: () => onsave(widget.uid),
                 icon: Icon(Icons.save),
                 label: Text('Save')),
             FlatButton.icon(
               onPressed: () => Navigator.of(context).push(MaterialPageRoute(
                   builder: (context) => Status(
-                        uid: srn,
+                        uid: widget.uid,
                       ))),
               icon: Icon(Icons.analytics),
               label: Text('Analytics'),
