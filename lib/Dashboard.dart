@@ -55,6 +55,7 @@ class _DashBoardState extends State<DashBoard> {
       "studyhours": _studycontroller.text,
       "activity": json.encode(activity),
       "srn": id,
+      "date": DateTime.now().toString(),
     };
     String body = json.encode(data);
     http.Response response = await http.post(
