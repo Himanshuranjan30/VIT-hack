@@ -54,7 +54,7 @@ class _DashBoardState extends State<DashBoard> {
       "sleephours": _sleepcontroller.text,
       "studyhours": _studycontroller.text,
       "activity": json.encode(activity),
-      "srn": widget.uid,
+      "srn": id,
     };
     String body = json.encode(data);
     http.Response response = await http.post(
@@ -68,7 +68,7 @@ class _DashBoardState extends State<DashBoard> {
   @override
   Widget build(BuildContext context) {
     print(activity);
-
+    print(widget.uid);
     return Scaffold(
       appBar: AppBar(
         title: Text('Student'),

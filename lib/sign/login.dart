@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mongo_dart/mongo_dart.dart' as mongo;
+import 'package:student/Dashboard.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -62,8 +63,10 @@ class _LoginState extends State<Login> {
                 onPressed: () async {
                   bool check = await oncheck();
                   if (check == true)
-                    Navigator.of(context)
-                        .pushNamed('/dashboard', arguments: _srn.text);
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => DashBoard(
+                              uid: _srn.text,
+                            )));
                   else
                     Navigator.of(context).pushNamed('/register');
                 },
