@@ -41,15 +41,16 @@ class _DashBoardState extends State<DashBoard> {
 
   void onsave(String id) async {
     coll = db.collection(id);
+    String datetime = DateTime.now().toString();
     await coll.insert({
-      "_id": DateTime.now().toString(),
+      "_id": datetime,
       "classhours": _classcontroller.text,
       "sleephours": _sleepcontroller.text,
       "studyhours": _studycontroller.text,
       "activity": json.encode(activity),
     });
     Map data = {
-      "_id": DateTime.now().toString(),
+      "_id": datetime,
       "classhours": _classcontroller.text,
       "sleephours": _sleepcontroller.text,
       "studyhours": _studycontroller.text,
