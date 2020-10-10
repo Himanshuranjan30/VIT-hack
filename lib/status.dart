@@ -4,7 +4,8 @@ import "dart:convert";
 
 class Status extends StatefulWidget {
   String uid;
-  Status({Key key, @required this.uid}) : super(key: key);
+  String time;
+  Status({Key key, @required this.uid, this.time}) : super(key: key);
   @override
   _StatusState createState() => _StatusState();
 }
@@ -18,6 +19,7 @@ class _StatusState extends State<Status> {
   List<String> classh = [];
   List<String> study = [];
   List<String> sleep = [];
+  double performance = 0;
   database() async {
     //final User user = await _auth.currentUser;
     db = await mongo.Db.create(
@@ -27,13 +29,12 @@ class _StatusState extends State<Status> {
     print('DB Connected');
     coll = db.collection(widget.uid);
     print(coll);
-    await coll.find().forEach((v) {
-      print(v["classhours"]);
-      classh.add(v["classhours"]);
-      study.add(v["studyhours"]);
-      sleep.add(v["sleephours"]);
+    await coll.find(mongo.where.lt("_id", widget.time)).forEach((v) {
+      print(v["performance"]);
+      setState(() {
+        if (v['performance'] != null) performance = v["performance"];
+      });
     });
-    print(classh);
   }
 
   void initState() {
@@ -47,7 +48,7 @@ class _StatusState extends State<Status> {
     return Scaffold(
         appBar: AppBar(),
         body: Center(
-          child: Text(widget.uid),
+          child: Text(performance.toString()),
         ));
   }
 }

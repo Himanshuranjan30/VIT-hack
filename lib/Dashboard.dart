@@ -39,9 +39,10 @@ class _DashBoardState extends State<DashBoard> {
     database();
   }
 
+  String datetime;
   void onsave(String id) async {
     coll = db.collection(id);
-    String datetime = DateTime.now().toString();
+    datetime = DateTime.now().toString();
     await coll.insert({
       "_id": datetime,
       "classhours": _classcontroller.text,
@@ -113,6 +114,7 @@ class _DashBoardState extends State<DashBoard> {
               onPressed: () => Navigator.of(context).push(MaterialPageRoute(
                   builder: (context) => Status(
                         uid: widget.uid,
+                        time: datetime,
                       ))),
               icon: Icon(Icons.analytics),
               label: Text('Analytics'),
