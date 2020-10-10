@@ -5,6 +5,7 @@ import 'package:flutter_xlider/flutter_xlider.dart';
 import 'dart:convert';
 import 'package:mongo_dart/mongo_dart.dart' as mongo;
 import 'package:student/status.dart';
+import 'package:http/http.dart' as http;
 
 class DashBoard extends StatefulWidget {
   @override
@@ -45,6 +46,20 @@ class _DashBoardState extends State<DashBoard> {
       "studyhours": _studycontroller.text,
       "activity": json.encode(activity),
     });
+    Map data = {
+      "_id": DateTime.now().toString(),
+      "classhours": _classcontroller.text,
+      "sleephours": _sleepcontroller.text,
+      "studyhours": _studycontroller.text,
+      "activity": json.encode(activity),
+    };
+    String body = json.encode(data);
+    http.Response response = await http.post(
+      'http://10.0.2.2:5001',
+      headers: {"Content-Type": "application/json"},
+      body: body,
+    );
+    print(response.body);
   }
 
   @override

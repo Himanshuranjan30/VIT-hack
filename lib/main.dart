@@ -1,7 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:student/Dashboard.dart';
-import 'package:student/http.dart';
 
 import 'package:student/services/auth_provider.dart';
 import 'package:student/sign/login.dart';
@@ -33,7 +32,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: Request(),
+      home: Login(),
       routes: {
         '/dashboard': (ctx) => DashBoard(),
         '/login': (ctx) => Login(),
