@@ -43,23 +43,57 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: Text('Student Login'),
+        backgroundColor: Colors.indigo,
+      ),
       body: Container(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            TextField(
-              controller: _srn,
-              decoration: InputDecoration(hintText: 'enter your srn'),
-            ),
-            TextField(
-              controller: _pass,
-              decoration: InputDecoration(hintText: 'Enter password'),
+            Image.network(
+              'https://www.majhimaitrin.in/img/studlogin.png',
+              height: 100,
+              width: 100,
             ),
             SizedBox(
               height: 20,
             ),
-            FlatButton(
+            Text(
+              'Enter Your SRN',
+              style: TextStyle(
+                  fontStyle: FontStyle.normal, fontWeight: FontWeight.bold),
+            ),
+            Center(
+              child: Container(
+                width: 250,
+                child: TextField(
+                  controller: _srn,
+                  decoration: InputDecoration(hintText: 'enter your srn'),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 30,
+            ),
+            Text(
+              'Enter Your Password',
+              style: TextStyle(
+                  fontStyle: FontStyle.normal, fontWeight: FontWeight.bold),
+            ),
+            Center(
+              child: Container(
+                width: 250,
+                child: TextField(
+                  controller: _pass,
+                  decoration: InputDecoration(hintText: 'Enter password'),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            FlatButton.icon(
                 onPressed: () async {
                   bool check = await oncheck();
                   if (check == true)
@@ -70,10 +104,26 @@ class _LoginState extends State<Login> {
                   else
                     Navigator.of(context).pushNamed('/register');
                 },
-                child: Text('Login')),
-            FlatButton(
-                onPressed: () => Navigator.of(context).pushNamed('/register'),
-                child: Text('Register'))
+                icon: Icon(Icons.login),
+                color: Colors.indigo,
+                label: Text('Login', style: TextStyle(color: Colors.white))),
+            SizedBox(
+              height: 20,
+            ),
+            Text("Haven't Registered yet?",
+                style: TextStyle(fontWeight: FontWeight.bold)),
+            SizedBox(
+              height: 15,
+            ),
+            FlatButton.icon(
+              onPressed: () => Navigator.of(context).pushNamed('/register'),
+              icon: Icon(Icons.app_registration),
+              label: Text(
+                'Register Now',
+                style: TextStyle(color: Colors.white),
+              ),
+              color: Colors.indigo,
+            )
           ],
         ),
       ),

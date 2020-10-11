@@ -74,52 +74,94 @@ class _DashBoardState extends State<DashBoard> {
     print(widget.uid);
     return Scaffold(
       appBar: AppBar(
-        title: Text('Student'),
+        title: Text('Student Data'),
+        backgroundColor: Colors.indigo,
       ),
-      body: Container(
-        child: Column(
-          children: [
-            TextField(
-              controller: _classcontroller,
-              decoration: InputDecoration(hintText: 'Enter your Class Hours'),
-            ),
-            TextField(
-              controller: _studycontroller,
-              decoration: InputDecoration(hintText: 'Enter your Study Hours'),
-            ),
-            TextField(
-              controller: _sleepcontroller,
-              decoration: InputDecoration(hintText: 'Enter your Sleep Hours'),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Text(
-              'Select your activity score here',
-              style: TextStyle(fontStyle: FontStyle.normal),
-            ),
-            FlutterSlider(
-                values: [10],
-                max: 10,
-                min: 0,
-                onDragging: (handlerIndex, lowerValue, upperValue) {
-                  activity = lowerValue;
-                  print(activity);
-                }),
-            FlatButton.icon(
+      body: SingleChildScrollView(
+        child: Container(
+          child: Column(
+            children: [
+              Image.network(
+                'https://www.isafeventures.com/wp-content/uploads/2015/09/student-data-870x400_c.jpg',
+                height: 200,
+                width: 200,
+              ),
+              Center(
+                child: Container(
+                  width: 250,
+                  child: TextField(
+                    controller: _classcontroller,
+                    decoration:
+                        InputDecoration(hintText: 'Enter your Class Hours'),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              Center(
+                child: Container(
+                  width: 250,
+                  child: TextField(
+                    controller: _studycontroller,
+                    decoration:
+                        InputDecoration(hintText: 'Enter your Study Hours'),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              Center(
+                child: Container(
+                  width: 250,
+                  child: TextField(
+                    controller: _sleepcontroller,
+                    decoration:
+                        InputDecoration(hintText: 'Enter your Sleep Hours'),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 30,
+              ),
+              Text(
+                'Select your activity score here',
+                style: TextStyle(fontStyle: FontStyle.normal),
+              ),
+              FlutterSlider(
+                  values: [10],
+                  max: 10,
+                  min: 0,
+                  onDragging: (handlerIndex, lowerValue, upperValue) {
+                    activity = lowerValue;
+                    print(activity);
+                  }),
+              FlatButton.icon(
                 onPressed: () => onsave(widget.uid),
                 icon: Icon(Icons.save),
-                label: Text('Save')),
-            FlatButton.icon(
-              onPressed: () => Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => Status(
-                        uid: widget.uid,
-                        time: datetime,
-                      ))),
-              icon: Icon(Icons.analytics),
-              label: Text('Analytics'),
-            )
-          ],
+                label: Text('Save', style: TextStyle(color: Colors.white)),
+                color: Colors.indigo,
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              FlatButton.icon(
+                  onPressed: () => Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => Status(
+                            uid: widget.uid,
+                            time: datetime,
+                          ))),
+                  icon: Icon(Icons.analytics),
+                  label: Text(
+                    'Analytics',
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                  color: Colors.indigo)
+            ],
+          ),
         ),
       ),
     );
